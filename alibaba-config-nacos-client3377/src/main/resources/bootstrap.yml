@@ -1,0 +1,21 @@
+# 优先级高的bootstrap.yml
+# nacos-server充当config-server
+server:
+  port: 3377
+spring:
+  application:
+    name: nacos-config-client
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+      config:
+        server-addr: localhost:8848
+        file-extension: yml  # config client所读取的配置文件格式
+        # group: # 可以配置组别
+        # namespace: # 填写namespace ID 可以使用不同命名空间
+
+# 关于nacos config 的详细配置规则见：https://nacos.io/zh-cn/docs/quick-start-spring-cloud.html
+# ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
+# 对于本项目，需要在nacos-server中新建nacos-config-client-dev.yml配置
+# 注意后缀为yml必须与file-extension: yml一致，同时为yaml或yml

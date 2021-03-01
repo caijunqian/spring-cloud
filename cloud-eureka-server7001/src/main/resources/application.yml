@@ -1,0 +1,17 @@
+server:
+  port: 7001
+
+eureka:
+  instance:
+    hostname: eureka7001.com #eureka服务端实例名称 本机设置了端口映射到localhost
+  client:
+    register-with-eureka: false  #false表示不向注册中心注册自己
+    fetch-registry: false #声明自己就是注册中心，职责就是维护服务实例，并不需要检索服务
+    service-url:
+      # 集群服务间相互注册
+      defaultZone: http://eureka7002.com:7002/eureka/
+  server:
+    #true：开启自我保护模式，false：关闭自我保护模式
+    enable-self-preservation: false
+    #清理间隔（单位：毫秒，默认是 60*1000）
+    eviction-interval-timer-in-ms: 60000

@@ -1,0 +1,15 @@
+server:
+  port: 83
+
+spring:
+  application:
+    name: nacos-order-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+# 消费者要去访问的注册进nacos微服务名称，
+# 实现访问服务对象与代码的分离，转移到配置文件中
+service-url:
+  nacos-user-service: http://nacos-payment-provider

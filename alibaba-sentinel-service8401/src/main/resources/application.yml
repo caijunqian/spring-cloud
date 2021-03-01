@@ -1,0 +1,30 @@
+server:
+  port: 8401
+
+spring:
+  application:
+    name: alibaba-sentinel-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        # 默认8719 假如被占用会自动从8719开始依次加1扫描，直到找到未被占用的端口
+        port: 8719
+      # 配置数据源，把sentinel的流控规则等持久化到nacos 然后在nacos的配置规则中进行json格式的sentinel规则配置
+      datasource:
+        dsl:
+          nacos:
+            server-addr: localhost:8848
+            dataId: alibaba-sentinel-service
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

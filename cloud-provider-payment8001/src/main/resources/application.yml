@@ -1,0 +1,33 @@
+server:
+  port: 8001
+
+spring:
+  application:
+    name: cloud-payment-service
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/dbcloud?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Hongkong
+    username: root
+    password: mysqlpasswd
+
+  # zipkin的相关配置
+  zipkin:
+    base-url: http://localhost:9411
+  sleuth:
+    sampler:
+      # 采样值介于0到1，表示展示的链路长度
+      probability: 1
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.jelly.cloud2021.entites
+
+eureka:
+  client:
+    register-with-eureka: true #是否将自己加入注册中心，默认为true
+    fetch-registry: true #是否从eureka Server抓取已有的注册信息，默认为true。单节点无所谓，集群时必须设置true才能配合ribbon使用负载均衡
+    service-url:
+      defaultZone: http://localhost:7000/eureka # eureka服务地址
+      # #集群版 若是单机模拟，必须设置多个域名映射到127.0.0.1
+#      defaultZone: http://eureka7001.com:7001/eureka/,http://eureka7002.com:7002/eureka/ #集群版

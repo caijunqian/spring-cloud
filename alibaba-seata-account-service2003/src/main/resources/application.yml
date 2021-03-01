@@ -1,0 +1,32 @@
+server:
+  port: 2003
+spring:
+  application:
+    name: seata-account-service
+  cloud:
+    # 配置seata
+    alibaba:
+      seata:
+        tx-service-group: diy_tx_group # 自定义的事务组名称，与file.conf的seata配置文件一致
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/seata_account?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Hongkong
+    username: root
+    password: mysqlpasswd
+feign:
+  hystrix:
+    enabled: false
+
+logging:
+  level:
+    io:
+      seata: info
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.jelly.cloud.domain

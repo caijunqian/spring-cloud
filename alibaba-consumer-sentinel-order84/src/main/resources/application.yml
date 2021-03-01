@@ -1,0 +1,30 @@
+server:
+  port: 84
+
+spring:
+  application:
+    name: nacos-order-consumer
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        # 默认8719 假如被占用会自动从8719开始依次加1扫描，直到找到未被占用的端口
+        port: 8719
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+# 消费者要去访问的注册进nacos微服务名称，
+# 实现访问服务对象与代码的分离，转移到配置文件中
+
+feign:
+  sentinel:
+    enabled: true
+
+service-url:
+  nacos-user-service: http://alibaba-sentinel-service
